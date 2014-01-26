@@ -2,6 +2,8 @@
 VERSION = 0.3.0
 LIBNAME = scpi
 
+CC?=$(PREFIX)gcc
+AR?=$(PREFIX)ar
 
 CFLAGS += -Wextra -O1 -g -fPIC -Iinc
 LDFLAGS += -Wl,--as-needed
