@@ -1,16 +1,25 @@
 
 VERSION = 0.3.0
 LIBNAME = scpi
+PREFIX?=arm-none-eabi-
 
-CC?=$(PREFIX)gcc
-AR?=$(PREFIX)ar
+CC:=$(PREFIX)gcc
+AR:=$(PREFIX)ar
+PLAT_DIR:= $(shell $(CC) -dumpmachine)
 
+ifeq ($(PREFIX),arm-none-eabi-)
+FP_FLAGS        ?= -mfloat-abi=hard -mfpu=fpv4-sp-d16
+ARCH_FLAGS      ?= -mthumb -mcpu=cortex-m4 $(FP_FLAGS)
+CFLAGS += -Wextra -Os -ggdb3 -Iinc $(ARCH_FLAGS)
+LDFLAGS += -Wl,--as-needed $(ARCH_FLAGS)
+else
 CFLAGS += -Wextra -O1 -g -fPIC -Iinc
-LDFLAGS += -Wl,--as-needed
+endif
+
 TESTFLAGS += -lcunit
 
-OBJDIR=obj
-DISTDIR=dist
+OBJDIR=obj/$(PLAT_DIR)
+DISTDIR=dist/$(PLAT_DIR)
 TESTDIR=test
 
 STATICLIBFLAGS = rcs
