@@ -13,7 +13,7 @@ ARCH_FLAGS      ?= -mthumb -mcpu=cortex-m4 $(FP_FLAGS)
 CFLAGS += -Wextra -Os -ggdb3 -Iinc $(ARCH_FLAGS)
 LDFLAGS += -Wl,--as-needed $(ARCH_FLAGS)
 else
-CFLAGS += -Wextra -O1 -g -fPIC -Iinc
+CFLAGS += -Wextra -O0 -ggdb3 -fPIC -Iinc
 endif
 
 TESTFLAGS += -lcunit

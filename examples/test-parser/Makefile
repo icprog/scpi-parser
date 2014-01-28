@@ -1,9 +1,10 @@
 
 PROG = test
+PREFIX_BASE=$(shell $(CC) -dumpmachine)
 
 SRCS = main.c ../common/scpi-def.c
 CFLAGS += -Wextra -I ../../libscpi/inc/
-LDFLAGS += ../../libscpi/dist/libscpi.a
+LDFLAGS += ../../libscpi/dist/$(PREFIX_BASE)/libscpi.a
 
 
 all: $(PROG)
