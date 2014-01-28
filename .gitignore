@@ -20,6 +20,9 @@ examples/*/test
 
 # Backup files
 *~
+*.swp
 /libscpi/obj/
 /libscpi/dist/
 
+# tools and other droppings
+/libscpi/nbproject/
