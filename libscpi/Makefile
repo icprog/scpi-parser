@@ -5,7 +5,7 @@ PREFIX?=arm-none-eabi-
 
 CC:=$(PREFIX)gcc
 AR:=$(PREFIX)ar
-PLAT_DIR:= $(shell $(CC) -dumpmachine)
+PLAT_DIR?= $(shell $(CC) -dumpmachine)
 
 ifeq ($(PREFIX),arm-none-eabi-)
 FP_FLAGS        ?= -mfloat-abi=hard -mfpu=fpv4-sp-d16
@@ -18,9 +18,9 @@ endif
 
 TESTFLAGS += -lcunit
 
-OBJDIR=obj/$(PLAT_DIR)
-DISTDIR=dist/$(PLAT_DIR)
-TESTDIR=test
+OBJDIR=$(PLAT_DIR)/obj
+DISTDIR=$(PLAT_DIR)/dist
+TESTDIR=$(PLAT_DIR)/test
 
 STATICLIBFLAGS = rcs
 SHAREDLIBFLAGS = $(LDFLAGS) -shared -Wl,-soname
